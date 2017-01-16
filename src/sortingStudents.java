@@ -10,26 +10,38 @@
 //        The program should you an Array to store Student objects. It should sort the array prior to printing the student list.
 //        Validate user input so that the number of students can only be a positive integer,
 //        the last name and first name values cannot be empty Strings, and the score is an integer from 0 and 100.
+
+
 import java.util.*;
 
-public class sortingStudents {
+
+public class sortingStudents {               //scan how many students in a class, each students name & grade
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        Validator validator = new Validator(input);
+
+
         System.out.print("Enter the number of students: ");
         int numofstudents = input.nextInt();
         String[] names = new String[numofstudents];
         int[] array = new int[numofstudents];
+
+
         for(int i = 0; i < numofstudents; i++) {
             System.out.print("Enter the student's name: ");
             names[i] = input.next();
             System.out.print("Enter the student's score: ");
-            array[i] = input.nextInt();
+
+            array[i]  = validator.getIntWithinRange("Provide an integer between 0 and 100 : " , 0, 100);
         }
-        selectionSort(names, array);
-        System.out.println(Arrays.toString(names));
+
+        selectionSort(names, array);        //sort score from highest to lowest
+        System.out.println("Student Performance List from 'gooder' to good: " + (Arrays.toString(names)));  //print array to a string
     }
-    public static void selectionSort(String[] names, int[] array) {
-        for(int i = array.length - 1; i >= 1; i--) {
+
+
+    public static void selectionSort(String[] names, int[] array) {   //sort students and print in order (highest grade to lowest grade)
+        for(int i = array.length -1; i >= 1; i--) {
             String temp;
             int currentMax = array[0];
             int currentMaxIndex = 0;
